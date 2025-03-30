@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHARAGA DEV TEAM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #08f;
+            --neon-pink: #f0f;
+            --neon-purple: #90f;
+            --neon-green: #0f8;
+            --dark-bg: #0a0a12;
+            --glass-bg: rgba(20, 20, 40, 0.6);
+            --text-light: #eee;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Неоновый текст */
+        .neon-text {
+            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+
+        /* Секции */
+        section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        /* Хедер */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(10, 10, 30, 0.9), rgba(5, 5, 15, 0.9)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center/cover;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: var(--neon-blue);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Карточки команды */
+        .team-section {
+            background: var(--dark-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-pink);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: var(--glass-bg);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 100, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--neon-purple));
+            z-index: -1;
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 100, 255, 0.3);
+        }
+
+        .team-card:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                filter: blur(5px) hue-rotate(0deg);
+            }
+            100% {
+                filter: blur(5px) hue-rotate(360deg);
+            }
+        }
+
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+            margin: 0 auto 20px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover .member-photo {
+            box-shadow: 0 0 30px var(--neon-pink);
+            border-color: var(--neon-pink);
+        }
+
+        .member-name {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--neon-blue);
+        }
+
+        .member-role {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--neon-green);
+        }
+
+        .view-more {
+            display: block;
+            width: max-content;
+            margin: 0 auto;
+            padding: 8px 20px;
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .view-more:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .member-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            padding: 0 10px;
+        }
+
+        .member-details.active {
+            max-height: 500px;
+            padding: 20px 10px;
+        }
+
+        .member-bio {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .member-tasks {
+            margin-bottom: 15px;
+        }
+
+        .member-tasks h4 {
+            color: var(--neon-pink);
+            margin-bottom: 10px;
+        }
+
+        .member-tasks ul {
+            padding-left: 20px;
+        }
+
+        .member-tasks li {
+            margin-bottom: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Фильтры */
+        .team-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* Отзывы */
+        .reviews-section {
+            background: linear-gradient(rgba(10, 10, 30, 0.9), rgba(5, 5, 15, 0.9)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center/cover;
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .reviews-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 30px;
+            padding: 20px 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .reviews-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-scrollbar {
+            height: 8px;
+            width: 80%;
+            margin: 20px auto 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .slider-thumb {
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            border-radius: 10px;
+            position: absolute;
+            left: 0;
+            cursor: grab;
+        }
+
+        .review-card {
+            min-width: 300px;
+            scroll-snap-align: start;
+            background: var(--glass-bg);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 0, 200, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 0, 200, 0.3);
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .review-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid var(--neon-pink);
+        }
+
+        .review-author-info h4 {
+            color: var(--neon-pink);
+            margin-bottom: 5px;
+        }
+
+        .review-author-info p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .review-text {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .review-rating {
+            color: var(--neon-green);
+            margin-bottom: 15px;
+        }
+
+        .review-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .like-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .like-btn:hover {
+            color: var(--neon-pink);
+            transform: scale(1.2);
+        }
+
+        .like-btn.liked {
+            color: var(--neon-pink);
+        }
+
+        .add-review-btn {
+            display: block;
+            width: max-content;
+            margin: 30px auto 0;
+            padding: 10px 25px;
+            background: transparent;
+            color: var(--neon-pink);
+            border: 1px solid var(--neon-pink);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .add-review-btn:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        /* Кнопка заказа */
+        .order-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            padding: 15px 25px;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 200, 255, 0.8);
+        }
+
+        /* Кнопка "Вы разработчик?" */
+        .dev-login-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 100, 255, 0.5);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .dev-login-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 100, 255, 0.8);
+        }
+
+        .dev-login-btn::after {
+            content: 'Вы разработчик?';
+            position: absolute;
+            right: 70px;
+            white-space: nowrap;
+            background: var(--glass-bg);
+            padding: 8px 15px;
+            border-radius: 30px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dev-login-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Модальные окна */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--dark-bg);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--neon-pink);
+            transform: rotate(90deg);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--neon-blue);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--neon-green);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 0 20px var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Админ панель */
+        .admin-panel {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--glass-bg);
+            border-radius: 15px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--neon-green);
+            box-shadow: 0 0 20px var(--neon-green);
+            z-index: 100;
+            transform: translateY(150%);
+            transition: transform 0.5s ease;
+            width: 350px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .admin-panel.active {
+            transform: translateY(0);
+        }
+
+        .admin-panel h3 {
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .admin-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .admin-tab {
+            padding: 8px 15px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .admin-tab.active {
+            border-bottom: 2px solid var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        .admin-tab-content {
+            display: none;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .admin-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .admin-list-item {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-list-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .admin-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .admin-btn {
+            padding: 8px 15px;
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+        }
+
+        .admin-btn.delete {
+            color: var(--neon-pink);
+            border-color: var(--neon-pink);
+        }
+
+        .admin-btn.delete:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .dev-login-btn::after {
+                display: none;
+            }
+
+            .admin-panel {
+                width: 90%;
+                left: 5%;
+            }
+        }
+
+        /* Анимации при скролле */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <section class="hero">
+        <h1 class="neon-text">SHARAGA DEV TEAM</h1>
+        <p>Профессиональная разработка на HTML, C++, C#, Python с использованием современных баз данных</p>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Команда -->
+    <section class="team-section">
+        <h2 class="section-title animate-on-scroll">Наша команда</h2>
+        
+        <div class="team-filters animate-on-scroll">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="frontend">Frontend</button>
+            <button class="filter-btn" data-filter="backend">Backend</button>
+            <button class="filter-btn" data-filter="design">Дизайн</button>
+            <button class="filter-btn" data-filter="fullstack">Fullstack</button>
+            <button class="filter-btn" data-filter="qa">QA</button>
+        </div>
+        
+        <div class="team-grid">
+            <!-- Гасанбеков Агамирза -->
+            <div class="team-card animate-on-scroll" data-role="frontend">
+                <img src="https://i.ibb.co/4wFr73jm/photo-2025-03-11-18-37-35.jpg" alt="Гасанбеков Агамирза" class="member-photo">
+                <h3 class="member-name">Гасанбеков Агамирза</h3>
+                <p class="member-role">Frontend-разработчик</p>
+                <button class="view-more">Подробнее</button>
+                <div class="member-details">
+                    <p class="member-bio">Опытный фронтенд-разработчик с 5-летним стажем. Специализируется на создании интерактивных пользовательских интерфейсов.</p>
+                    <div class="member-tasks">
+                        <h4>Задачи:</h4>
+                        <ul>
+                            <li>Верстка адаптивных интерфейсов</li>
+                            <li>Реализация анимаций</li>
+                            <li>Оптимизация производительности</li>
+                        </ul>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Пэлэдуцэ Роман -->
+            <div class="team-card animate-on-scroll" data-role="backend">
+                <img src="https://i.ibb.co/hxhXGzyk/photo-2025-02-18-16-18-47.jpg" alt="Пэлэдуцэ Роман" class="member-photo">
+                <h3 class="member-name">Пэлэдуцэ Роман</h3>
+                <p class="member-role">Backend-разработчик</p>
+                <button class="view-more">Подробнее</button>
+                <div class="member-details">
+                    <p class="member-bio">Серверный разработчик с глубокими знаниями в архитектуре баз данных и API. Любит сложные задачи и чистый код.</p>
+                    <div class="member-tasks">
+                        <h4>Задачи:</h4>
+                        <ul>
+                            <li>Разработка серверной логики</li>
+                            <li>Оптимизация запросов к БД</li>
+                            <li>Обеспечение безопасности</li>
+                        </ul>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Порфирьева Ариадна -->
+            <div class="team-card animate-on-scroll" data-role="design">
+                <img src="https://i.ibb.co/7NRSxCRn/photo-2025-03-30-19-22-44.jpg" alt="Порфирьева Ариадна" class="member-photo">
+                <h3 class="member-name">Порфирьева Ариадна</h3>
+                <p class="member-role">UI/UX Дизайнер</p>
+                <button class="view-more">Подробнее</button>
+                <div class="member-details">
+                    <p class="member-bio">Творческий дизайнер с уникальным чувством стиля. Превращает сложные идеи в интуитивно понятные интерфейсы.</p>
+                    <div class="member-tasks">
+                        <h4>Задачи:</h4>
+                        <ul>
+                            <li>Создание макетов и прототипов</li>
+                            <li>Разработка дизайн-систем</li>
+                            <li>Тестирование пользовательских сценариев</li>
+                        </ul>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Климов Павел -->
+            <div class="team-card animate-on-scroll" data-role="design">
+                <img src="https://i.ibb.co/4gWZGd7L/photo-2025-03-30-19-22-44.jpg" alt="Климов Павел" class="member-photo">
+                <h3 class="member-name">Климов Павел</h3>
+                <p class="member-role">UI/UX Дизайнер</p>
+                <button class="view-more">Подробнее</button>
+                <div class="member-details">
+                    <p class="member-bio">Опытный дизайнер интерфейсов с вниманием к деталям. Создает удобные и эстетичные решения.</p>
+                    <div class="member-tasks">
+                        <h4>Задачи:</h4>
+                        <ul>
+                            <li>Проектирование пользовательских потоков</li>
+                            <li>Создание анимаций интерфейса</li>
+                            <li>Разработка гайдлайнов</li>
+                        </ul>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Паршин Владимир -->
+            <div class="team-card animate-on-scroll" data-role="qa">
+                <img src="https://i.ibb.co/pvNd9X3d/photo-2025-02-18-15-33-32.jpg" alt="Паршин Владимир" class="member-photo">
+                <h3 class="member-name">Паршин Владимир</h3>
+                <p class="member-role">QA Инженер</p>
+                <button class="view-more">Подробнее</button>
+                <div class="member-details">
+                    <p class="member-bio">Внимательный тестировщик с аналитическим складом ума. Находит баги там, где другие их не замечают.</p>
+                    <div class="member-tasks">
+                        <h4>Задачи:</h4>
+                        <ul>
+                            <li>Ручное и автоматизированное тестирование</li>
+                            <li>Документирование багов</li>
+                            <li>Контроль качества релизов</li>
+                        </ul>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Никоненко Михаил -->
+            <div class="team-card animate-on-scroll" data-role="fullstack">
+                <img src="https://i.ibb.co/XPDcTTF/photo-2025-03-30-19-17-39.jpg" alt="Никоненко Михаил" class="member-photo">
+                <h3 class="member-name">Никоненко Михаил</h3>
+                <p class="member-role">Fullstack разработчик</p>
+                <button class="view-more">Подробнее</button>
+                <div class="member-details">
+                    <p class="member-bio">Универсальный разработчик, способный работать как с клиентской, так и с серверной частью. Быстро обучается новым технологиям.</p>
+                    <div class="member-tasks">
+                        <h4>Задачи:</h4>
+                        <ul>
+                            <li>Интеграция фронтенда и бэкенда</li>
+                            <li>Разработка универсальных модулей</li>
+                            <li>Техническая поддержка проекта</li>
+                        </ul>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Иванов Дмитрий -->
+            <div class="team-card animate-on-scroll" data-role="qa">
+                <img src="https://i.ibb.co/Df6FKtkZ/photo-2025-03-14-14-12-29.jpg" alt="Иванов Дмитрий" class="member-photo">
+                <h3 class="member-name">Иванов Дмитрий</h3>
+                <p class="member-role">QA Инженер</p>
+                <button class="view-more">Подробнее</button>
+                <div class="member-details">
+                    <p class="member-bio">Специалист по тестированию с опытом работы в крупных проектах. Ответственный и внимательный к деталям.</p>
+                    <div class="member-tasks">
+                        <h4>Задачи:</h4>
+                        <ul>
+                            <li>Написание тест-кейсов</li>
+                            <li>Автоматизация тестирования</li>
+                            <li>Анализ результатов тестирования</li>
+                        </ul>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="reviews-section">
+        <h2 class="section-title animate-on-scroll">Отзывы о нас</h2>
+        
+        <div class="reviews-container animate-on-scroll">
+            <div class="reviews-slider">
+                <div class="review-card">
+                    <div class="review-author">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Клиент">
+                        <div class="review-author-info">
+                            <h4>Алексей Петров</h4>
+                            <p>CEO TechCompany</p>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        <p>Отличная команда! Выполнили проект вовремя и даже добавили несколько фич, которые мы не планировали. Качество кода на высоте.</p>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-actions">
+                        <button class="like-btn"><i class="far fa-heart"></i> 24</button>
+                        <span>2 недели назад</span>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-author">
+                        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Клиент">
+                        <div class="review-author-info">
+                            <h4>Мария Иванова</h4>
+                            <p>Директор DigitalAgency</p>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        <p>Работали над сложным проектом с жесткими сроками. Команда проявила профессионализм и гибкость. Рекомендую!</p>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="review-actions">
+                        <button class="like-btn"><i class="far fa-heart"></i> 18</button>
+                        <span>1 месяц назад</span>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-author">
+                        <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Клиент">
+                        <div class="review-author-info">
+                            <h4>Дмитрий Смирнов</h4>
+                            <p>CTO StartupInc</p>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        <p>Нестандартный подход к решению задач. Особенно впечатлила анимация интерфейса - пользователи в восторге!</p>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-actions">
+                        <button class="like-btn"><i class="far fa-heart"></i> 32</button>
+                        <span>3 месяца назад</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-scrollbar">
+                <div class="slider-thumb"></div>
+            </div>
+            
+            <button class="add-review-btn animate-on-scroll">Добавить отзыв</button>
+        </div>
+    </section>
+
+    <!-- Кнопка заказа -->
+    <button class="order-btn">Сделать заказ</button>
+
+    <!-- Кнопка "Вы разработчик?" -->
+    <div class="dev-login-btn">
+        <i class="fas fa-code"></i>
+    </div>
+
+    <!-- Модальное окно входа -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Вход для разработчиков</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Логин</label>
+                    <input type="text" id="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <button type="submit" class="submit-btn">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно добавления отзыва -->
+    <div class="modal" id="review-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Добавить отзыв</h2>
+            <form id="review-form">
+                <div class="form-group">
+                    <label for="review-name">Ваше имя</label>
+                    <input type="text" id="review-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="review-position">Должность/Компания</label>
+                    <input type="text" id="review-position" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Текст отзыва</label>
+                    <textarea id="review-text" class="form-control" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Оценка</label>
+                    <div class="review-rating">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Отправить отзыв</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно заказа -->
+    <div class="modal" id="order-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Оформить заказ</h2>
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="order-name">Ваше имя</label>
+                    <input type="text" id="order-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="order-email">Email</label>
+                    <input type="email" id="order-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="order-phone">Телефон</label>
+                    <input type="tel" id="order-phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="order-project">Тип проекта</label>
+                    <select id="order-project" class="form-control" required>
+                        <option value="">Выберите тип</option>
+                        <option value="website">Веб-сайт</option>
+                        <option value="mobile">Мобильное приложение</option>
+                        <option value="desktop">Десктопное приложение</option>
+                        <option value="design">Дизайн</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="order-desc">Описание проекта</label>
+                    <textarea id="order-desc" class="form-control" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="order-budget">Бюджет</label>
+                    <input type="text" id="order-budget" class="form-control" required>
+                </div>
+                <button type="submit" class="submit-btn">Отправить заказ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Админ панель -->
+    <div class="admin-panel" id="admin-panel">
+        <h3>Панель управления</h3>
+        
+        <div class="admin-tabs">
+            <div class="admin-tab active" data-tab="members">Команда</div>
+            <div class="admin-tab" data-tab="reviews">Отзывы</div>
+            <div class="admin-tab" data-tab="orders">Заказы</div>
+        </div>
+        
+        <div class="admin-tab-content active" id="members-tab">
+            <div class="admin-list" id="members-list">
+                <!-- Список участников будет здесь -->
+            </div>
+            <div class="admin-actions">
+                <button class="admin-btn" id="add-member">Добавить участника</button>
+            </div>
+        </div>
+        
+        <div class="admin-tab-content" id="reviews-tab">
+            <div class="admin-list" id="reviews-list">
+                <!-- Список отзывов будет здесь -->
+            </div>
+        </div>
+        
+        <div class="admin-tab-content" id="orders-tab">
+            <div class="admin-list" id="orders-list">
+                <!-- Список заказов будет здесь -->
+            </div>
+        </div>
+        
+        <div class="admin-actions">
+            <button class="admin-btn delete" id="logout">Выйти</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно добавления участника -->
+    <div class="modal" id="member-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="member-modal-title">Добавить участника</h2>
+            <form id="member-form">
+                <input type="hidden" id="member-id">
+                <div class="form-group">
+                    <label for="member-name">ФИО</label>
+                    <input type="text" id="member-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="member-role">Роль</label>
+                    <select id="member-role" class="form-control" required>
+                        <option value="frontend">Frontend</option>
+                        <option value="backend">Backend</option>
+                        <option value="design">Дизайн</option>
+                        <option value="fullstack">Fullstack</option>
+                        <option value="qa">QA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="member-position">Должность</label>
+                    <input type="text" id="member-position" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="member-photo-url">Ссылка на фото</label>
+                    <input type="url" id="member-photo-url" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="member-bio">Описание</label>
+                    <textarea id="member-bio" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="member-tasks">Задачи (каждая с новой строки)</label>
+                    <textarea id="member-tasks" class="form-control" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимации при скролле
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(el => observer.observe(el));
+            
+            // Данные
+            let teamMembers = [
+                {
+                    id: 1,
+                    name: "Гасанбеков Агамирза",
+                    role: "frontend",
+                    position: "Frontend-разработчик",
+                    photo: "https://i.ibb.co/4wFr73jm/photo-2025-03-11-18-37-35.jpg",
+                    bio: "Опытный фронтенд-разработчик с 5-летним стажем. Специализируется на создании интерактивных пользовательских интерфейсов.",
+                    tasks: [
+                        "Верстка адаптивных интерфейсов",
+                        "Реализация анимаций",
+                        "Оптимизация производительности"
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "Пэлэдуцэ Роман",
+                    role: "backend",
+                    position: "Backend-разработчик",
+                    photo: "https://i.ibb.co/hxhXGzyk/photo-2025-02-18-16-18-47.jpg",
+                    bio: "Серверный разработчик с глубокими знаниями в архитектуре баз данных и API. Любит сложные задачи и чистый код.",
+                    tasks: [
+                        "Разработка серверной логики",
+                        "Оптимизация запросов к БД",
+                        "Обеспечение безопасности"
+                    ]
+                },
+                {
+                    id: 3,
+                    name: "Порфирьева Ариадна",
+                    role: "design",
+                    position: "UI/UX Дизайнер",
+                    photo: "https://i.ibb.co/7NRSxCRn/photo-2025-03-30-19-22-44.jpg",
+                    bio: "Творческий дизайнер с уникальным чувством стиля. Превращает сложные идеи в интуитивно понятные интерфейсы.",
+                    tasks: [
+                        "Создание макетов и прототипов",
+                        "Разработка дизайн-систем",
+                        "Тестирование пользовательских сценариев"
+                    ]
+                },
+                {
+                    id: 4,
+                    name: "Климов Павел",
+                    role: "design",
+                    position: "UI/UX Дизайнер",
+                    photo: "https://i.ibb.co/4gWZGd7L/photo-2025-03-30-19-22-44.jpg",
+                    bio: "Опытный дизайнер интерфейсов с вниманием к деталям. Создает удобные и эстетичные решения.",
+                    tasks: [
+                        "Проектирование пользовательских потоков",
+                        "Создание анимаций интерфейса",
+                        "Разработка гайдлайнов"
+                    ]
+                },
+                {
+                    id: 5,
+                    name: "Паршин Владимир",
+                    role: "qa",
+                    position: "QA Инженер",
+                    photo: "https://i.ibb.co/pvNd9X3d/photo-2025-02-18-15-33-32.jpg",
+                    bio: "Внимательный тестировщик с аналитическим складом ума. Находит баги там, где другие их не замечают.",
+                    tasks: [
+                        "Ручное и автоматизированное тестирование",
+                        "Документирование багов",
+                        "Контроль качества релизов"
+                    ]
+                },
+                {
+                    id: 6,
+                    name: "Никоненко Михаил",
+                    role: "fullstack",
+                    position: "Fullstack разработчик",
+                    photo: "https://i.ibb.co/XPDcTTF/photo-2025-03-30-19-17-39.jpg",
+                    bio: "Универсальный разработчик, способный работать как с клиентской, так и с серверной частью. Быстро обучается новым технологиям.",
+                    tasks: [
+                        "Интеграция фронтенда и бэкенда",
+                        "Разработка универсальных модулей",
+                        "Техническая поддержка проекта"
+                    ]
+                },
+                {
+                    id: 7,
+                    name: "Иванов Дмитрий",
+                    role: "qa",
+                    position: "QA Инженер",
+                    photo: "https://i.ibb.co/Df6FKtkZ/photo-2025-03-14-14-12-29.jpg",
+                    bio: "Специалист по тестированию с опытом работы в крупных проектах. Ответственный и внимательный к деталям.",
+                    tasks: [
+                        "Написание тест-кейсов",
+                        "Автоматизация тестирования",
+                        "Анализ результатов тестирования"
+                    ]
+                }
+            ];
+
+            let reviews = [
+                {
+                    id: 1,
+                    name: "Алексей Петров",
+                    position: "CEO TechCompany",
+                    photo: "https://randomuser.me/api/portraits/men/1.jpg",
+                    text: "Отличная команда! Выполнили проект вовремя и даже добавили несколько фич, которые мы не планировали. Качество кода на высоте.",
+                    rating: 5,
+                    likes: 24,
+                    date: "2 недели назад"
+                },
+                {
+                    id: 2,
+                    name: "Мария Иванова",
+                    position: "Директор DigitalAgency",
+                    photo: "https://randomuser.me/api/portraits/women/2.jpg",
+                    text: "Работали над сложным проектом с жесткими сроками. Команда проявила профессионализм и гибкость. Рекомендую!",
+                    rating: 4.5,
+                    likes: 18,
+                    date: "1 месяц назад"
+                },
+                {
+                    id: 3,
+                    name: "Дмитрий Смирнов",
+                    position: "CTO StartupInc",
+                    photo: "https://randomuser.me/api/portraits/men/3.jpg",
+                    text: "Нестандартный подход к решению задач. Особенно впечатлила анимация интерфейса - пользователи в восторге!",
+                    rating: 5,
+                    likes: 32,
+                    date: "3 месяца назад"
+                }
+            ];
+
+            let orders = [];
+
+            // Открытие/закрытие модальных окон
+            const loginModal = document.getElementById('login-modal');
+            const reviewModal = document.getElementById('review-modal');
+            const orderModal = document.getElementById('order-modal');
+            const memberModal = document.getElementById('member-modal');
+            const adminPanel = document.getElementById('admin-panel');
+            const devLoginBtn = document.querySelector('.dev-login-btn');
+            const orderBtn = document.querySelector('.order-btn');
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            const addReviewBtn = document.querySelector('.add-review-btn');
+            
+            devLoginBtn.addEventListener('click', () => {
+                loginModal.classList.add('active');
+            });
+            
+            orderBtn.addEventListener('click', () => {
+                orderModal.classList.add('active');
+            });
+            
+            addReviewBtn.addEventListener('click', () => {
+                reviewModal.classList.add('active');
+            });
+            
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    loginModal.classList.remove('active');
+                    reviewModal.classList.remove('active');
+                    orderModal.classList.remove('active');
+                    memberModal.classList.remove('active');
+                });
+            });
+            
+            // Клик вне модального окна
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.classList.remove('active');
+                }
+                if (e.target === reviewModal) {
+                    reviewModal.classList.remove('active');
+                }
+                if (e.target === orderModal) {
+                    orderModal.classList.remove('active');
+                }
+                if (e.target === memberModal) {
+                    memberModal.classList.remove('active');
+                }
+            });
+            
+            // Форма входа
+            const loginForm = document.getElementById('login-form');
+            
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Простая проверка (в реальном проекте нужно использовать серверную аутентификацию)
+                if (username === 'admin' && password === '12345') {
+                    loginModal.classList.remove('active');
+                    adminPanel.classList.add('active');
+                    loadAdminData();
+                } else {
+                    alert('Неверные учетные данные!');
+                }
+            });
+            
+            // Выход из админки
+            document.getElementById('logout').addEventListener('click', () => {
+                adminPanel.classList.remove('active');
+            });
+            
+            // Фильтрация карточек команды
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const teamCards = document.querySelectorAll('.team-card');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Удаляем активный класс у всех кнопок
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Добавляем активный класс текущей кнопке
+                    btn.classList.add('active');
+                    
+                    const filter = btn.dataset.filter;
+                    
+                    teamCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.role === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Раскрытие карточек участников
+            const viewMoreBtns = document.querySelectorAll('.view-more');
+            
+            viewMoreBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const details = btn.nextElementSibling;
+                    details.classList.toggle('active');
+                    
+                    if (details.classList.contains('active')) {
+                        btn.textContent = 'Свернуть';
+                    } else {
+                        btn.textContent = 'Подробнее';
+                    }
+                });
+            });
+            
+            // Рейтинг в отзывах
+            const ratingStars = document.querySelectorAll('.review-rating i[data-rating]');
+            
+            ratingStars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const rating = parseInt(star.dataset.rating);
+                    const ratingContainer = star.parentElement;
+                    
+                    // Удаляем все звезды после текущей
+                    for (let i = 0; i < ratingStars.length; i++) {
+                        if (i < rating) {
+                            ratingStars[i].classList.remove('far');
+                            ratingStars[i].classList.add('fas');
+                        } else {
+                            ratingStars[i].classList.remove('fas');
+                            ratingStars[i].classList.add('far');
+                        }
+                    }
+                });
+            });
+            
+            // Лайки отзывов
+            const likeBtns = document.querySelectorAll('.like-btn');
+            
+            likeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btn.classList.toggle('liked');
+                    const icon = btn.querySelector('i');
+                    
+                    if (btn.classList.contains('liked')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        const currentCount = parseInt(btn.textContent.match(/\d+/)[0]);
+                        btn.innerHTML = `<i class="fas fa-heart"></i> ${currentCount + 1}`;
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        const currentCount = parseInt(btn.textContent.match(/\d+/)[0]);
+                        btn.innerHTML = `<i class="far fa-heart"></i> ${currentCount - 1}`;
+                    }
+                });
+            });
+            
+            // Плавный скролл
+            document.querySelector('.scroll-down').addEventListener('click', () => {
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Добавление нового отзыва
+            const reviewForm = document.getElementById('review-form');
+            
+            reviewForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('review-name').value;
+                const position = document.getElementById('review-position').value;
+                const text = document.getElementById('review-text').value;
+                const rating = document.querySelector('.review-rating i.fas')?.dataset.rating || 0;
+                
+                // Создаем новый отзыв
+                const newReview = {
+                    id: reviews.length + 1,
+                    name: name,
+                    position: position,
+                    photo: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 50)}.jpg`,
+                    text: text,
+                    rating: parseInt(rating),
+                    likes: 0,
+                    date: "только что"
+                };
+                
+                reviews.push(newReview);
+                
+                // Добавляем в слайдер
+                addReviewToSlider(newReview);
+                
+                // Закрываем модальное окно
+                reviewModal.classList.remove('active');
+                
+                // Сбрасываем форму
+                reviewForm.reset();
+                
+                // Обновляем обработчики событий для новых элементов
+                initReviewEvents();
+            });
+            
+            function addReviewToSlider(review) {
+                const slider = document.querySelector('.reviews-slider');
+                const newReview = document.createElement('div');
+                newReview.className = 'review-card';
+                newReview.innerHTML = `
+                    <div class="review-author">
+                        <img src="${review.photo}" alt="${review.name}">
+                        <div class="review-author-info">
+                            <h4>${review.name}</h4>
+                            <p>${review.position}</p>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        <p>${review.text}</p>
+                    </div>
+                    <div class="review-rating">
+                        ${'<i class="fas fa-star"></i>'.repeat(review.rating)}
+                        ${'<i class="far fa-star"></i>'.repeat(5 - review.rating)}
+                    </div>
+                    <div class="review-actions">
+                        <button class="like-btn"><i class="far fa-heart"></i> ${review.likes}</button>
+                        <span>${review.date}</span>
+                    </div>
+                `;
+                
+                slider.appendChild(newReview);
+            }
+            
+            // Форма заказа
+            const orderForm = document.getElementById('order-form');
+            
+            orderForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('order-name').value;
+                const email = document.getElementById('order-email').value;
+                const phone = document.getElementById('order-phone').value;
+                const project = document.getElementById('order-project').value;
+                const desc = document.getElementById('order-desc').value;
+                const budget = document.getElementById('order-budget').value;
+                
+                const newOrder = {
+                    id: orders.length + 1,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    project: project,
+                    desc: desc,
+                    budget: budget,
+                    date: new Date().toLocaleDateString(),
+                    status: "Новый"
+                };
+                
+                orders.push(newOrder);
+                orderModal.classList.remove('active');
+                orderForm.reset();
+                
+                if (adminPanel.classList.contains('active')) {
+                    loadAdminData();
+                }
+                
+                alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
+            });
+            
+            // Админ панель - табы
+            const adminTabs = document.querySelectorAll('.admin-tab');
+            
+            adminTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    adminTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    document.querySelectorAll('.admin-tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+                });
+            });
+            
+            // Загрузка данных в админ панель
+            function loadAdminData() {
+                loadMembersList();
+                loadReviewsList();
+                loadOrdersList();
+            }
+            
+            function loadMembersList() {
+                const list = document.getElementById('members-list');
+                list.innerHTML = '';
+                
+                teamMembers.forEach(member => {
+                    const item = document.createElement('div');
+                    item.className = 'admin-list-item';
+                    item.innerHTML = `
+                        <span>${member.name} (${member.position})</span>
+                        <div>
+                            <button class="admin-btn edit-member" data-id="${member.id}">Ред.</button>
+                            <button class="admin-btn delete delete-member" data-id="${member.id}">Уд.</button>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+                
+                // Обработчики для кнопок редактирования/удаления
+                document.querySelectorAll('.edit-member').forEach(btn => {
+                    btn.addEventListener('click', () => editMember(parseInt(btn.dataset.id)));
+                });
+                
+                document.querySelectorAll('.delete-member').forEach(btn => {
+                    btn.addEventListener('click', () => deleteMember(parseInt(btn.dataset.id)));
+                });
+            }
+            
+            function loadReviewsList() {
+                const list = document.getElementById('reviews-list');
+                list.innerHTML = '';
+                
+                reviews.forEach(review => {
+                    const item = document.createElement('div');
+                    item.className = 'admin-list-item';
+                    item.innerHTML = `
+                        <span>${review.name} - ${review.rating}★</span>
+                        <div>
+                            <button class="admin-btn delete delete-review" data-id="${review.id}">Уд.</button>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+                
+                document.querySelectorAll('.delete-review').forEach(btn => {
+                    btn.addEventListener('click', () => deleteReview(parseInt(btn.dataset.id)));
+                });
+            }
+            
+            function loadOrdersList() {
+                const list = document.getElementById('orders-list');
+                list.innerHTML = '';
+                
+                orders.forEach(order => {
+                    const item = document.createElement('div');
+                    item.className = 'admin-list-item';
+                    item.innerHTML = `
+                        <div>
+                            <strong>#${order.id} ${order.name}</strong><br>
+                            ${order.project} - ${order.budget}<br>
+                            <small>${order.date} - ${order.status}</small>
+                        </div>
+                        <div>
+                            <button class="admin-btn edit-order" data-id="${order.id}">Ред.</button>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+            
+            // Добавление/редактирование участника
+            document.getElementById('add-member').addEventListener('click', () => {
+                document.getElementById('member-modal-title').textContent = 'Добавить участника';
+                document.getElementById('member-form').reset();
+                document.getElementById('member-id').value = '';
+                memberModal.classList.add('active');
+            });
+            
+            function editMember(id) {
+                const member = teamMembers.find(m => m.id === id);
+                if (!member) return;
+                
+                document.getElementById('member-modal-title').textContent = 'Редактировать участника';
+                document.getElementById('member-id').value = member.id;
+                document.getElementById('member-name').value = member.name;
+                document.getElementById('member-role').value = member.role;
+                document.getElementById('member-position').value = member.position;
+                document.getElementById('member-photo-url').value = member.photo;
+                document.getElementById('member-bio').value = member.bio;
+                document.getElementById('member-tasks').value = member.tasks.join('\n');
+                
+                memberModal.classList.add('active');
+            }
+            
+            function deleteMember(id) {
+                if (confirm('Удалить этого участника?')) {
+                    teamMembers = teamMembers.filter(m => m.id !== id);
+                    loadMembersList();
+                    renderTeamMembers();
+                }
+            }
+            
+            function deleteReview(id) {
+                if (confirm('Удалить этот отзыв?')) {
+                    reviews = reviews.filter(r => r.id !== id);
+                    loadReviewsList();
+                    renderReviews();
+                }
+            }
+            
+            const memberForm = document.getElementById('member-form');
+            
+            memberForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const id = document.getElementById('member-id').value;
+                const name = document.getElementById('member-name').value;
+                const role = document.getElementById('member-role').value;
+                const position = document.getElementById('member-position').value;
+                const photo = document.getElementById('member-photo-url').value;
+                const bio = document.getElementById('member-bio').value;
+                const tasks = document.getElementById('member-tasks').value.split('\n').filter(t => t.trim() !== '');
+                
+                if (id) {
+                    // Редактирование существующего участника
+                    const index = teamMembers.findIndex(m => m.id === parseInt(id));
+                    if (index !== -1) {
+                        teamMembers[index] = {
+                            ...teamMembers[index],
+                            name,
+                            role,
+                            position,
+                            photo,
+                            bio,
+                            tasks
+                        };
+                    }
+                } else {
+                    // Добавление нового участника
+                    const newMember = {
+                        id: teamMembers.length > 0 ? Math.max(...teamMembers.map(m => m.id)) + 1 : 1,
+                        name,
+                        role,
+                        position,
+                        photo,
+                        bio,
+                        tasks
+                    };
+                    teamMembers.push(newMember);
+                }
+                
+                memberModal.classList.remove('active');
+                loadMembersList();
+                renderTeamMembers();
+            });
+            
+            // Рендер карточек команды
+            function renderTeamMembers() {
+                const grid = document.querySelector('.team-grid');
+                grid.innerHTML = '';
+                
+                teamMembers.forEach(member => {
+                    const card = document.createElement('div');
+                    card.className = 'team-card animate-on-scroll';
+                    card.dataset.role = member.role;
+                    card.innerHTML = `
+                        <img src="${member.photo}" alt="${member.name}" class="member-photo">
+                        <h3 class="member-name">${member.name}</h3>
+                        <p class="member-role">${member.position}</p>
+                        <button class="view-more">Подробнее</button>
+                        <div class="member-details">
+                            <p class="member-bio">${member.bio}</p>
+                            <div class="member-tasks">
+                                <h4>Задачи:</h4>
+                                <ul>
+                                    ${member.tasks.map(task => `<li>${task}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-telegram"></i></a>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                
+                // Инициализация обработчиков для новых карточек
+                document.querySelectorAll('.view-more').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const details = this.nextElementSibling;
+                        details.classList.toggle('active');
+                        this.textContent = details.classList.contains('active') ? 'Свернуть' : 'Подробнее';
+                    });
+                });
+            }
+            
+            // Рендер отзывов
+            function renderReviews() {
+                const slider = document.querySelector('.reviews-slider');
+                slider.innerHTML = '';
+                
+                reviews.forEach(review => {
+                    addReviewToSlider(review);
+                });
+                
+                initReviewEvents();
+            }
+            
+            // Инициализация событий для отзывов
+            function initReviewEvents() {
+                // Лайки для новых отзывов
+                document.querySelectorAll('.like-btn').forEach(btn => {
+                    if (!btn.hasAttribute('data-initialized')) {
+                        btn.addEventListener('click', function() {
+                            this.classList.toggle('liked');
+                            const icon = this.querySelector('i');
+                            
+                            if (this.classList.contains('liked')) {
+                                icon.classList.remove('far');
+                                icon.classList.add('fas');
+                                const currentCount = parseInt(this.textContent.match(/\d+/)[0]);
+                                this.innerHTML = `<i class="fas fa-heart"></i> ${currentCount + 1}`;
+                            } else {
+                                icon.classList.remove('fas');
+                                icon.classList.add('far');
+                                const currentCount = parseInt(this.textContent.match(/\d+/)[0]);
+                                this.innerHTML = `<i class="far fa-heart"></i> ${currentCount - 1}`;
+                            }
+                        });
+                        btn.setAttribute('data-initialized', 'true');
+                    }
+                });
+            }
+            
+            // Ползунок для отзывов
+            const slider = document.querySelector('.reviews-slider');
+            const thumb = document.querySelector('.slider-thumb');
+            
+            slider.addEventListener('scroll', () => {
+                const scrollPos = slider.scrollLeft;
+                const maxScroll = slider.scrollWidth - slider.clientWidth;
+                const thumbPos = (scrollPos / maxScroll) * (slider.clientWidth - thumb.offsetWidth);
+                thumb.style.left = `${thumbPos}px`;
+            });
+            
+            let isDragging = false;
+            let startX, scrollLeft, thumbLeft;
+            
+            thumb.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                thumbLeft = thumb.offsetLeft;
+                document.body.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const x = e.clientX - startX;
+                const newThumbLeft = thumbLeft + x;
+                const maxThumbLeft = slider.clientWidth - thumb.offsetWidth;
+                
+                if (newThumbLeft >= 0 && newThumbLeft <= maxThumbLeft) {
+                    thumb.style.left = `${newThumbLeft}px`;
+                    const scrollPos = (newThumbLeft / maxThumbLeft) * (slider.scrollWidth - slider.clientWidth);
+                    slider.scrollLeft = scrollPos;
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                document.body.style.cursor = '';
+            });
+            
+            // Инициализация
+            initReviewEvents();
+        });
+    </script>
+</body>
+</html>
